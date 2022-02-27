@@ -27,7 +27,6 @@ MySQL:
   Prefix: ''
   #UseSSL: true
   #PublicKeyRetrieval: false
-  #MaxLifeTime: -1
   #Additional info on connection string
   #Line: ''
 
@@ -38,7 +37,7 @@ MySQL:
 
 # Let players who never joined before vote
 # Recommend: False (Will prevent creating random user data)
-AllowUnjoined: false
+AllowUnjoined: true
 
 # Use server lookup for when allowunjoined is set to false
 # Recommend leaving enabled unless you face issues
@@ -58,14 +57,14 @@ VoteReminding:
   # Use /vote next to see when you can be reminded
   # Players require the perm "VotingPlugin.Login.RemindVotes" or "VotingPlugin.Player"
   # To remind if any votesite is available (rather than all) use the permission "VotingPlugin.Login.RemindVotes.Any"
-  Enabled: true
+  Enabled: false
 
   # Will remind player on login if he can vote
-  RemindOnLogin: true
+  RemindOnLogin: false
   
   # Whether or not to remind only once when the player can vote
   # Does not apply to login reminds.
-  RemindOnlyOnce: true
+  RemindOnlyOnce: false
 
   # Delay to remind votes in minutes
   # Set to -1 to disable
@@ -77,7 +76,7 @@ VoteReminding:
   # This can also be edited via /av gui
   Rewards:
     Messages:
-      Player: '&aYou have %sitesavailable% sites to vote on still!'
+      Player: ''
     Title:
       Enabled: false
       Title: '&cRemember to vote!'
@@ -107,7 +106,7 @@ Format:
 
   # Broadcast vote message
   # Set to an empty message to disable
-  BroadcastMsg: '&6[&4Broadcast&6] &2Thanks &c%player% &2for voting on %SiteName%'
+  BroadcastMsg: '&6%player% &bjust voted on &6%SiteName%&b and received &6100 coins'
   
   # Broadcast only when player is online
   BroadcastWhenOnline: false
@@ -125,7 +124,7 @@ Format:
     # %url% = site URL
     Vote: 
       Text:
-      - '&3&lVote for our server!'
+      - '&bVote for our server and receive &6100 coins &bper vote!'
       
       # If you want to want to use the feature below where the plugin will
       # automaticly list the sites then set the message in the text above
@@ -134,7 +133,7 @@ Format:
       # make sure to set VoteURL in your VoteSites
       # Requires above to be true
       # Text will be sent before this
-      Sites: '&3%num%: &6&l%SiteName% &6- %url%'
+      Sites: '&b%num%: &6%SiteName% &6- %url%'
       
       # If true, links will always be forced as urls
       ForceLinks: true
@@ -249,10 +248,6 @@ Format:
       ToggleBroadcasts:
         Enabled: '&cYou will now see vote broadcasts'
         Disabled: '&cYou will no longer see vote broadcasts'
-        
-      ToggleReminders:
-        Enabled: '&cVote reminders enabled'
-        Disabled: '&cVote reminders disabled'
   
   # Msg on top voter award, will only send message if that place has a reward set
   # %place% = place - 1,2,3,etc
@@ -443,20 +438,6 @@ UsePrimaryAccountForPlaceholders: false
 # Only affects placeholderapi placeholders
 AlwaysWaitForCachePlaceholders: false
 
-# Enable auto caching placeholders
-# Generally this works well, but if you need to cache placeholders manually set them below
-AutoCachePlaceholders: false
-
-# Set which placeholders to cache at all times
-# Use for placeholders to are pulled constantly or on the main thread
-# Mainly aimed for scoreboards
-# Placeholders may auto cache in certain conditions
-# Will use additional memory, but not a lot
-# Still in early stages, please report bugs
-# Please remove VotingPlugin_ from the placeholder listed here
-CachedPlaceholders: []
-#- Total_AllTime
-
 # If true, permissions will be handled differently
 MultiplePermissionsCheck: false
 
@@ -582,11 +563,6 @@ PreloadSkulls: false
 # Setting to false disables saving skulls in a cache to improve speeds
 # Will reduce ram usage (very little) if disabled, but slow GUI speeds when using skulls
 LoadSkulls: true
-
-# Limit number of users to load in a second
-# Effects background tasks mainly
-# set to -1 to disable (default value)
-#PlayerDataLoadLimit: 500
 
 # Use vault for permission checks
 # May not work on some plugins
